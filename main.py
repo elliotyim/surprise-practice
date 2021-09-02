@@ -31,10 +31,6 @@ def get_top_n(predictions, n=10):
     return top_n
 
 
-def predict(algo, uid, iid):
-    pred = algo.predict(uid, iid)
-
-
 ratings = pd.read_csv("./dataset/ratings.csv", sep=",")
 reader = Reader(rating_scale=(0.5, 5.0))
 
@@ -49,14 +45,24 @@ algo.fit(trainset)
 testset = trainset.build_anti_testset()
 predictions = algo.test(testset)
 
-# top_n = get_top_n(predictions=predictions, n=10)
+top_n = get_top_n(predictions=predictions, n=10)
 
-# # Print the recommended items for each user
+# Print the recommended items for each user
 # for uid, user_ratings in top_n.items():
 #     if uid == 1:
 #         print(uid, [iid for (iid, _) in user_ratings])
 
 # Predict the rating of the specific user's item
+uid = 1
+iid = 318
+pred = algo.predict(uid, iid)
+print(pred)
+
+uid = 1
+iid = 2300
+pred = algo.predict(uid, iid)
+print(pred)
+
 uid = 1
 iid = 922
 pred = algo.predict(uid, iid)
